@@ -1,0 +1,110 @@
+<html>
+    <head>
+        <script>
+            {
+
+
+                tasksAll = [
+                    '123', 'ĄĘ', 'Ć', 'Ł', 'Ó', 'Ś', 'Ź', 'Ż',
+                    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
+                    'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
+                    'R', 'S', 'T', 'U', 'W', 'Y', 'Z',
+                ]
+
+                task = null;
+
+                var interval = null;
+                var state = false;
+
+                function randomTask() {
+                    tasksAllCopy = tasksAll;
+
+                    tasksFinal = [];
+                    tasksFinal.push(tasksAllCopy[Math.floor(Math.random() * tasksAllCopy.length)]);
+                    tasksAllCopy = tasksAllCopy.filter(x => x !== tasksFinal[0]);
+                    tasksFinal.push(tasksAllCopy[Math.floor(Math.random() * tasksAllCopy.length)]);
+
+                    document.getElementById("outcome").innerHTML = tasksFinal;
+                    console.log(tasksFinal);
+                }
+
+                function roulette() {
+                    window.state = !window.state;
+                    goButton = document.getElementById("go");
+
+                    if (state) {
+                        goButton.innerHTML = "<h1>STOP</h1>";
+                        goButton.classList.toggle("stop");
+
+                        window.interval = setInterval(function() {
+                            randomTask();
+                        }, 100);
+                    } else {
+                        goButton.innerHTML = "<h1>LOSUJ</h1>";
+                        goButton.classList.toggle("stop");
+                        clearInterval(window.interval);
+                    }
+                }
+            }
+        </script>
+        <style>
+            body {
+                font-family: fantasy;
+            }
+
+            .noselect {
+                -webkit-touch-callout: none; /* iOS Safari */
+                -webkit-user-select: none; /* Safari */
+                -khtml-user-select: none; /* Konqueror HTML */
+                -moz-user-select: none; /* Old versions of Firefox */
+                -ms-user-select: none; /* Internet Explorer/Edge */
+                user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+            }
+
+            .container {
+                position: absolute;
+                top: calc(50% - 20vh);
+                left: calc(50% - 20vw);
+                width: 40vw;
+                height: 40vh;
+            }
+
+            .button {
+                text-align: center;
+                width: 100%;
+                padding: 10px 0;
+                border-radius: 40px;
+                background-color: dodgerblue;
+                cursor: pointer;
+                font-weight: bold;
+                color: white;
+            }
+
+            .button.stop {
+                background-color: darkred;
+            }
+
+            .button:hover {
+                filter: brightness(110%);
+            }
+
+            #outcome {
+                width: 100%;
+                height: 98px;
+                border: 3px dotted dodgerblue;
+                border-radius: 40px;
+                padding: 10px 0;
+                margin-top: 1rem;
+                text-align: center;
+                vertical-align: middle;
+                font-size: 80px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div id="go" class="button noselect" onclick="roulette()"><h1>LOSUJ</h1></div>
+            <div id="outcome"></div>
+        </div>
+    </body>
+</html>
