@@ -2,8 +2,6 @@
     <head>
         <script>
             {
-
-
                 tasksAll = [
                     '123', 'ĄĘ', 'Ć', 'Ł', 'Ó', 'Ś', 'Ź', 'Ż',
                     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
@@ -33,14 +31,14 @@
                     goButton = document.getElementById("go");
 
                     if (state) {
-                        goButton.innerHTML = "<h1>STOP</h1>";
+                        goButton.innerHTML = "<div class='text'>STOP</div>";
                         goButton.classList.toggle("stop");
 
                         window.interval = setInterval(function() {
                             randomTask();
                         }, 100);
                     } else {
-                        goButton.innerHTML = "<h1>LOSUJ</h1>";
+                        goButton.innerHTML = "<div class='text'>START</div>";
                         goButton.classList.toggle("stop");
                         clearInterval(window.interval);
                     }
@@ -63,7 +61,7 @@
 
             .container {
                 position: absolute;
-                top: calc(50% - 20vh);
+                top: calc(50% - 35vh);
                 left: calc(50% - 20vw);
                 width: 40vw;
                 height: 40vh;
@@ -71,13 +69,21 @@
 
             .button {
                 text-align: center;
-                width: 100%;
-                padding: 10px 0;
-                border-radius: 40px;
+                width: 30vw;
+                height: 30vw;
+                padding: 1px 0;
+                border-radius: 50%;
                 background-color: dodgerblue;
                 cursor: pointer;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .button .text {
+                margin-top: calc(50% - 40px);
                 font-weight: bold;
                 color: white;
+                font-size: 80px;
             }
 
             .button.stop {
@@ -99,11 +105,58 @@
                 vertical-align: middle;
                 font-size: 80px;
             }
+
+            @media (max-width: 1000px) {
+                .button .text {
+                    margin-top: calc(50% - 30px);
+                    font-size: 60px;
+                }
+            }
+
+            @media (max-width: 700px) {
+                .container {
+                    position: absolute;
+                    top: calc(50% - 250px);
+                    left: calc(50% - 175px);
+                    min-width: 350px;
+                    min-height: 350px;
+                }
+
+                .button {
+                    width: 350px;
+                    height: 350px;
+                }
+                .button .text {
+                    margin-top: calc(50% - 40px);
+                    font-size: 80px;
+                }
+            }
+
+            @media (max-width: 400px) {
+                .container {
+                    position: absolute;
+                    top: calc(50% - 200px);
+                    left: calc(50% - 150px);
+                    min-width: 300px;
+                    min-height: 300px;
+                }
+
+                .button {
+                    width: 300px;
+                    height: 300px;
+                }
+                .button .text {
+                    margin-top: calc(50% - 40px);
+                    font-size: 80px;
+                }
+            }
         </style>
     </head>
     <body>
         <div class="container">
-            <div id="go" class="button noselect" onclick="roulette()"><h1>LOSUJ</h1></div>
+            <div id="go" class="button noselect" onclick="roulette()">
+                <div class="text">START</div>
+            </div>
             <div id="outcome"></div>
         </div>
     </body>
